@@ -1,0 +1,71 @@
+<h3>Name: <%= @lender.first_name %></h3>
+<h3>Account Balance: <%= @balance %></h3>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+		<p><%= error %></p>
+	<% end %>
+<% end %>
+
+<h3>List of People in Need of Help</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Need Money For</th>
+			<th>Reason of Loan</th>
+			<th>Amount Needed</th>
+			<th>Amount Raised</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @borrowers.each do |borrower| %>
+			<tr>
+				<td><%= borrower.first_name %> <%= borrower.last_name %></td>
+				<td><%= borrower.purpose %></td>
+				<td><%= borrower.desc %></td>
+				<td><%= borrower.amount_needed %></td>
+				<td><%= borrower.money.sum(:amount) %></td>
+				<td>
+					<% if @balance > 0 && session[:user]["id"] == @lender.id and session[:user]["type"] == "lender" %>
+						<form action="/money/create" method="post">
+							<input type="number" step="10" name="money[amount]">
+							<input type="hidden" name="money[borrower_id]" value="<%= borrower.id %>">
+							<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+							<input type="submit" value="Lend">
+						</form>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h3>List of People You Lent Money To</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Need Money For</th>
+			<th>Reason for Loan</th>
+			<th>Amount Needed</th>
+			<th>Amount Raised</th>
+			<th>Amount Lent</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @lender.money.select("sum(amount) as amount, borrower_id").group(:borrower_id).each do |money| %>
+			<tr>
+				<td><%= money.borrower.first_name %> <%= money.borrower.last_name %></td>
+				<td><%= money.borrower.purpose %></td>
+				<td><%= money.borrower.desc %></td>
+				<td><%= money.borrower.amount_needed %></td>
+				<td><%= money.borrower.money.sum(:amount) %></td>
+				<td><%= money.amount %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<a href="/sessions/destroy" data-method="delete">Logout</a>

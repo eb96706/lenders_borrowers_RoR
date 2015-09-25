@@ -1,0 +1,25 @@
+<h3>Name: <%= @borrower.first_name %></h3>
+<h3>Amount Needed: $<%= @borrower.amount_needed %></h3>
+<h3>Amount Raised: $<%= @amount %></h3>
+
+<h3>List of People Who Lent You Money:</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Amount Lent</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @borrower.money.each do |money| %>
+			<tr>
+				<td><%= money.lender.first_name %></td>
+				<td><%= money.lender.email %></td>
+				<td><%= money.amount %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<a href="/sessions/destroy" data-method="delete">Logout</a>
