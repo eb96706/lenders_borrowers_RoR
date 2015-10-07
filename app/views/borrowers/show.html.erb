@@ -1,9 +1,11 @@
+<div class='container-fluid'>
 <h3>Name: <%= @borrower.first_name %></h3>
 <h3>Amount Needed: $<%= @borrower.amount_needed %></h3>
 <h3>Amount Raised: $<%= @amount %></h3>
 
 <h3>List of People Who Lent You Money:</h3>
-<table>
+<table class="table">
+
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -23,3 +25,4 @@
 </table>
 
 <a href="/sessions/destroy" data-method="delete">Logout</a>
+</div>

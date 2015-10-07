@@ -1,3 +1,4 @@
+<div class='container'>
 <h3>Name: <%= @lender.first_name %></h3>
 <h3>Account Balance: <%= @balance %></h3>
 
@@ -8,7 +9,8 @@
 <% end %>
 
 <h3>List of People in Need of Help</h3>
-<table>
+<table class="table">
+
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -69,3 +71,4 @@
 </table>
 
 <a href="/sessions/destroy" data-method="delete">Logout</a>
+</div>
