@@ -1,6 +1,6 @@
 <div class='container'>
-<h3>Name: <%= @lender.first_name %></h3>
-<h3>Account Balance: <%= @balance %></h3>
+<h4>Name: <%= @lender.first_name %></h4>
+<h4>Account Balance:$  <%= @balance %></h4>
 
 <% if flash[:errors] %>
 	<% flash[:errors].each do |error| %>
@@ -8,9 +8,8 @@
 	<% end %>
 <% end %>
 
-<h3>List of People in Need of Help</h3>
-<table class="table">
-
+<h4>List of People in Need of Help:</h4>
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -44,8 +43,8 @@
 	</tbody>
 </table>
 
-<h3>List of People You Lent Money To</h3>
-<table class="table">
+<h4>List of People You Lent Money To</h4>
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -69,6 +68,8 @@
 		<% end %>
 	</tbody>
 </table>
-
+<hr>
+<button type="button" class="btn btn-warning">
 <a href="/sessions/destroy" data-method="delete">Logout</a>
+</button>
 </div>

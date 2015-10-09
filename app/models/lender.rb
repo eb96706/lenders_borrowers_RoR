@@ -10,7 +10,7 @@ class Lender < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
   validates :money_amount, numericality: {greater_than: 9, message: "must have funds to lend"}
   validate :email_is_unique
-  validate :amount_is_multiple_of_ten
+  validate :amount_is_multiple_of_ten, if: 'money_amount.present?'
 
   def email_is_unique
   	if Borrower.where(email: email).present?

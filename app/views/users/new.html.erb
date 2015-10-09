@@ -1,6 +1,6 @@
 <div class='container'>
 <div class='reg_lender'>
-	<h2>Register as a Lender</h2>
+	<h3>Register as a Lender</h3>
 
 	<% if flash[:lender_notice] %>
 		<p class="success"><%= flash[:lender_notice] %></p>
@@ -20,12 +20,14 @@
 		<p>Confirm Password: <input type="password" name="lender[password_confirmation]"></p>
 		<p>Money: <input type="number" step="100" name="lender[money_amount]"></p>
 			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-			<p><a href="/sessions/new" data-method="get">Already a Member?</a> <input type="submit" value="Register"></p>
+			<button type="button" class="btn btn-link">
+				<p><a href="/sessions/new" data-method="get">Already a Member?</a> <input type="submit" value="Register"></p>
+			</button>
 	</form>
 </div>
 <div class='reg_borrower'>
 
-	<h2>Register as a Borrower</h2>
+	<h3>Register as a Borrower</h3>
 		<% if flash[:borrower_notice] %>
 			<p class="success"><%= flash[:borrower_notice] %></p>
 		<% end %>
